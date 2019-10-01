@@ -1,6 +1,6 @@
 const express = require('express');
-const Article = require('./models');
-const validateRequest = require("./utilities/validateRequest")
+const Article = require('../models/models');
+const validateRequest = require("../utilities/validateRequest")
 var router = express.Router();
 
 
@@ -51,11 +51,16 @@ router.delete('/articles/:id', (req, res) => {
 });
 
 // comment article route (http://localhost:9000/article/comment)
-router.post('/car/add-comment', (req, res) => {
-    let { username, comments } = req.body;
-    let bookName = req.params.name;
-    let book = Book.findOne(name=bookName)
-    res.send('im the about page!'); 
+router.post('/article/add-comment/:id', (req, res) => {
+    let { comment } = req.body;
+    let articleId = req.params.id;
+    Article.updateOne({_id:articleId}, {
+        $push: {
+            "comments": {comment: comment, user:"Static_user"}
+        }
+    }).then(() => res.json({message:"Comment added successfully"}))
+    .catch(err => console.log(err))
+     
 });
 
 module.exports = router;

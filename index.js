@@ -1,12 +1,11 @@
 const express = require('express');
-const routes = require('./routes');
+const routes = require('./src/routes/routes');
 var cors = require('cors')
 const bodyParser = require("body-parser");
 const path = require('path');
-require("./dbConnection")
+require("./src/dbConnection")
 
 const app = express();
-app.use(express.static(path.join(__dirname, "./build")))
 
 var port    =   process.env.PORT || 9000;
 
@@ -15,8 +14,5 @@ app.use(bodyParser.json());
 
 app.use("/", routes);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/build/index.html' ));
-})
 
 app.listen(port, () => console.log(`Server running on port ${port}`))

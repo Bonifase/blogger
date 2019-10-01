@@ -4,6 +4,7 @@ var Schema = new mongoose.Schema({
     title: {type:String, required:true},
     body: {type: String, required: true},
     author: {type: String, required: true},
+    comments: {type: Array},
     category: {type: String, enum: ['JavaScript', 'Python', 'C++']}
 }, { timestamps: true});
 
