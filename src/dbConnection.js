@@ -6,6 +6,6 @@ const options = {
 
 mongoose.connect(mongoURI, options)
 .then(() => console.log("Database is connected succesfully!!"))
-.catch(() => console.log("Database connection failed."));
+.catch((err) => console.log("Database connection failed. Contact your database admin"+ err));
 ;
 
